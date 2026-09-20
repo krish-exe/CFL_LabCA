@@ -1,0 +1,60 @@
+{
+  "name": "secureclinic",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SecureClinic: privacy-preserving appointment and health records portal",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "setup": "node scripts/setup.mjs",
+    "start": "node scripts/run.mjs start",
+    "dev": "node scripts/run.mjs dev",
+    "dev:client": "vite",
+    "build": "vite build",
+    "test:security": "node scripts/run.mjs test",
+    "db:migrate": "node scripts/run.mjs migrate",
+    "db:seed": "node scripts/run.mjs seed",
+    "db:reset": "node scripts/run.mjs seed --reset",
+    "db:start": "node scripts/local-db.mjs start",
+    "db:stop": "node scripts/local-db.mjs stop",
+    "db:create": "node scripts/create-db.mjs",
+    "bootstrap": "node scripts/bootstrap.mjs",
+    "demo:peek": "node scripts/run.mjs peek",
+    "demo:tamper": "node scripts/run.mjs tamper"
+  },
+  "dependencies": {
+    "argon2": "0.45.1",
+    "embedded-postgres": "18.4.0-beta.17",
+    "express": "5.3.0",
+    "express-rate-limit": "8.7.1",
+    "helmet": "8.3.0",
+    "jsonwebtoken": "9.0.3",
+    "multer": "2.4.0",
+    "pg": "8.23.1",
+    "qrcode": "1.5.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-router": "8.4.0",
+    "selfsigned": "5.5.0",
+    "zod": "4.6.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.2",
+    "vite": "8.3.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "argon2",
+      "@embedded-postgres/darwin-arm64",
+      "@embedded-postgres/darwin-x64",
+      "@embedded-postgres/linux-arm",
+      "@embedded-postgres/linux-arm64",
+      "@embedded-postgres/linux-ia32",
+      "@embedded-postgres/linux-ppc64",
+      "@embedded-postgres/linux-x64",
+      "@embedded-postgres/windows-x64"
+    ]
+  }
+}
