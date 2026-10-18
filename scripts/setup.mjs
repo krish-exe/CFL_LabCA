@@ -22,8 +22,12 @@ function step(title) {
 }
 
 function sh(command, args) {
+  // `npm run` exports the user's allow-scripts setting as an env var, which npm 12+ treats
+  // like the --allow-scripts flag and rejects in project installs. package.json#allowScripts applies instead.
+  const env = { ...process.env };
+  for (const key of Object.keys(env)) if (/^npm_config_allow[-_]scripts$/i.test(key)) delete env[key];
   // npm/pnpm are .cmd scripts on Windows and must run through a shell.
-  const result = spawnSync([command, ...args].join(' '), { cwd: root, stdio: 'inherit', shell: true });
+  const result = spawnSync([command, ...args].join(' '), { cwd: root, stdio: 'inherit', shell: true, env });
   if (result.status !== 0) {
     console.error(`\n✖ "${command} ${args.join(' ')}" failed. Fix the error above and run setup again.`);
     process.exit(result.status ?? 1);
